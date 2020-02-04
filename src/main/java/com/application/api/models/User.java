@@ -8,9 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotNull;
 import com.application.api.dto.UserDTO;
-import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "users")
@@ -22,16 +21,16 @@ public class User extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
+    @NotNull(message = "NAME cannot be null")
     @Column(name = "name")
-    @NotNull
     private String name;
 
     @Column(name = "birth_date")
-    @NotNull
+    @NotNull(message = "BIRTHDATE cannot be null")
     private String birthDate;
 
     @Column(name = "identifier", unique = true)
-    @NotNull
+    @NotNull(message = "IDENTIFIER cannot be null")
     public String identifier;
 
     @Column(columnDefinition = "BOOLEAN DEFAULT false", name = "admin")
