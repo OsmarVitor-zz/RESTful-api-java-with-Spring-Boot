@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.application.api.dto.UserDTO;
-
-import service.UserServiceImpl;
+import com.application.api.service.UserServiceImpl;
 
 @RestController
 @RequestMapping(value = "/api/users")

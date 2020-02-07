@@ -1,5 +1,6 @@
 package com.application.api.models;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -9,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.application.api.dto.UserDTO;
 
 @Entity
@@ -16,7 +20,7 @@ import com.application.api.dto.UserDTO;
 public class User extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
@@ -26,8 +30,9 @@ public class User extends BaseEntity {
     private String name;
 
     @Column(name = "birth_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "BIRTHDATE cannot be null")
-    private String birthDate;
+    private LocalDate birthDate;
 
     @Column(name = "identifier", unique = true)
     @NotNull(message = "IDENTIFIER cannot be null")
@@ -35,16 +40,17 @@ public class User extends BaseEntity {
 
     @Column(columnDefinition = "BOOLEAN DEFAULT false", name = "admin")
     public boolean admin;
-    
-    public User() {
+
+    @SuppressWarnings("unused")
+    private User() {
     }
-    
-    public User(String name, String birthDate, String identifier) {
+
+    public User(String name, LocalDate birthDate, String identifier) {
         this.name = name;
         this.birthDate = birthDate;
         this.identifier = identifier;
     }
-    
+
     public boolean isAdmin() {
         return admin;
     }
@@ -61,11 +67,11 @@ public class User extends BaseEntity {
         this.name = name;
     }
 
-    public String getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -83,7 +89,8 @@ public class User extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Users [uuid=" + uuid + ", name=" + name + ", age=" + birthDate + "]";
+        return "Users [uuid=" + uuid + ", name=" + name + ", birth_date="
+                + birthDate + "]";
     }
 
     public static UserDTO valueOf(User entity) {

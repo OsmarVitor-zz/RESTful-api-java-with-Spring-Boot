@@ -1,16 +1,23 @@
 package com.application.api.dto;
 
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UserDTO {
 
     private String name;
-    private String birthDate;
+
+    @JsonProperty("birth_date")
+    private LocalDate birthDate;
+
     public String identifier;
 
     public String getName() {
         return name;
     }
 
-    public String getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
@@ -22,8 +29,8 @@ public class UserDTO {
         this.name = name;
     }
 
-    public void setBirthDate(String BirthDate) {
-        this.birthDate = BirthDate;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public void setIdentifier(String identifier) {
@@ -32,8 +39,8 @@ public class UserDTO {
 
     @Override
     public String toString() {
-        return "UserDTO [name=" + name + ", age=" + birthDate + ", identifier="
-                + identifier + "]";
+        return "UserDTO [name=" + name + ", birthDate=" + birthDate
+                + ", identifier=" + identifier + "]";
     }
 
 }

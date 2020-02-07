@@ -3,7 +3,7 @@ package com.application.api.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import service.UserServiceImpl;
+import com.application.api.service.UserServiceImpl;
 
 @Configuration
 public class Config {
