@@ -1,7 +1,7 @@
 package com.application.api.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,13 +19,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> findAll() {
-        List<User> users = userRepository.findAll();
-        if (users.isEmpty()) {
-            return null;
-        }
-        List<UserDTO> userDTO = users.stream().map(e -> User.valueOf(e))
-                .collect(Collectors.toList());
-        return userDTO;
+        List<UserDTO> usersDTO = new ArrayList<>();
+
+        userRepository.findAll().stream().forEach(user -> {
+            usersDTO.add(User.valueOf(user));
+        });
+
+        return usersDTO;
     }
 
     @Override
