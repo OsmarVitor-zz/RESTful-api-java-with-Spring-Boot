@@ -76,4 +76,28 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>test</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<transaction.profile>test</transaction.profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<transaction.profile>staging</transaction.profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<transaction.profile>prod</transaction.profile>
+			</properties>
+		</profile>
+	</profiles>
+
 </project>

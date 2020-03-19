@@ -1,9 +1,8 @@
 package com.application.api.controller;
 
+import java.net.URI;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,35 +12,38 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.application.api.dto.UserDTO;
+import com.application.api.models.User;
 import com.application.api.service.UserServiceImpl;
 
 @RestController
-@RequestMapping(value = "/api/users")
+@RequestMapping("/api/user")
 public class UserController {
-
+ 
     @Autowired
     private UserServiceImpl service;
- 
-    @GetMapping()
+
+    @GetMapping("all")
     public List<UserDTO> listUsers() {
         return service.findAll();
     }
 
-    @PostMapping("/save")
+    @PostMapping("save")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        service.save(userDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        System.out.println("requisicao recebida");
+        User user = service.save(userDTO);
+        return ResponseEntity.ok(userDTO)
+                .created(URI.create("/api/users/" + user.getIdentifier()))
+                .build();
     }
 
-    @GetMapping("/{identifier}")
+    @GetMapping(value = "find/{identifier}")
     public ResponseEntity<UserDTO> getUserByIdentifier(
-            @PathVariable String identifier) {
+            @PathVariable(name = "identifier", required = true) String identifier) {
         return ResponseEntity.ok(service.findByIdentifier(identifier));
     }
 
-    @PutMapping("/{identifier}")
+    @PutMapping("update/{identifier}")
     public ResponseEntity<UserDTO> updateUser(
             @PathVariable(value = "identifier") String identifier,
             @RequestBody UserDTO userDTO) {
@@ -49,9 +51,8 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/{identifier}")
-    public ResponseEntity<Void> deleteUser(
-            @PathVariable String identifier) {
+    @DeleteMapping("delete/{identifier}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String identifier) {
         service.deleteUser(identifier);
         return ResponseEntity.noContent().build();
     }

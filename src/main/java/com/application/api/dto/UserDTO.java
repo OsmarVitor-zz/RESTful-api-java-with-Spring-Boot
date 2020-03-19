@@ -2,6 +2,8 @@ package com.application.api.dto;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserDTO {
@@ -9,10 +11,19 @@ public class UserDTO {
     private String name;
 
     @JsonProperty("birth_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     public String identifier;
+    
+    public UserDTO(String name, LocalDate birthDate, String identifier) {
+        this.name = name;
+        this.birthDate = birthDate;
+        this.identifier = identifier;
+    }
 
+    public UserDTO() {}
+    
     public String getName() {
         return name;
     }

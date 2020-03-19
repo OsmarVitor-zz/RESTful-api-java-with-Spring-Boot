@@ -29,10 +29,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(UserDTO userDTO) {
+    public User save(UserDTO userDTO) {
         User user = new User(userDTO.getName(), userDTO.getBirthDate(),
                 userDTO.getIdentifier());
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Override

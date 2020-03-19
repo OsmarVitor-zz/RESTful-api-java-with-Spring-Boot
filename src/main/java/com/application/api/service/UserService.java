@@ -8,7 +8,7 @@ import com.application.api.models.User;
 public interface UserService {
     List<UserDTO> findAll();
     
-    void save(UserDTO userDTO);
+    User save(UserDTO userDTO);
     
     UserDTO findByIdentifier(String identifier);
     
