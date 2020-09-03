@@ -1,6 +1,6 @@
 # API RESTful em Java com SpringBoot
 
-API construída no intuito aprender mais sobre conceitos de Java Web com Spring, aplicar as boas práticas de API Rest e Design Patterns.
+API construída no intuito aprender mais sobre conceitos de ```Java Web``` com ```Spring```, aplicar as boas ```práticas de API Rest```, ```Design Patterns```, aplicar conceitos de ```Mock e testes de integração```.
 
 
 ## Dependências
