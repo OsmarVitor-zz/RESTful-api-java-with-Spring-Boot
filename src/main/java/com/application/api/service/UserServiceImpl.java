@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO findByIdentifier(String identifier) {
         User user = userRepository.findByIdentifier(identifier).orElseThrow(
-                () -> new UserNotFoundException("User com o idenfiticador ["
+                () -> new UserNotFoundException("User com o identificador ["
                         + identifier + "] não cadastrado no sitema"));
         UserDTO userDTO = User.valueOf(user);
         return userDTO;
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(UserDTO userDTO, String identifier) {
         User user = userRepository.findByIdentifier(identifier).orElseThrow(
-                () -> new UserNotFoundException("User com o idenfiticador ["
+                () -> new UserNotFoundException("User com o identificador ["
                         + identifier + "] não cadastrado no sitema"));
         user.setName(userDTO.getName());
         return userRepository.save(user);
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(String identifier) {
         User user = userRepository.findByIdentifier(identifier).orElseThrow(
-                () -> new UserNotFoundException("User com o idenfiticador ["
+                () -> new UserNotFoundException("User com o identificador ["
                         + identifier + "] não cadastrado no sistema"));
         userRepository.delete(user);
     }

@@ -28,7 +28,7 @@ public class UserController {
         return service.findAll();
     }
 
-    @PostMapping("save")
+    @PostMapping("")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
         User user = service.save(userDTO);
         return ResponseEntity
