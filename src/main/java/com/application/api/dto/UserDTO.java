@@ -1,19 +1,20 @@
 package com.application.api.dto;
 
 import java.time.LocalDate;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.validation.constraints.NotNull;
 
 public class UserDTO {
 
+    @NotNull
     private String name;
 
     @JsonProperty("birth_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
+    @NotNull
     public String identifier;
     
     public UserDTO(String name, LocalDate birthDate, String identifier) {
